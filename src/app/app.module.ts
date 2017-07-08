@@ -3,19 +3,19 @@ import {NgModule} from '@angular/core';
 
 import {AppComponent} from './app.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
-import {GoodComponent} from './good/good.component';
 import {ParticipantModule} from "./participant/participant.module";
 import {FormsModule} from "@angular/forms";
+import {GoodModule} from "./good/good.module";
 
 @NgModule({
   declarations: [
     AppComponent,
-    DashboardComponent,
-    GoodComponent
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
     ParticipantModule,
+    GoodModule,
     FormsModule
   ],
   providers: [],
