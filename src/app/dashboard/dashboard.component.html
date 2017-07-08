@@ -1,0 +1,6 @@
+<div class="dashboard">
+  <button md-button disableRipple (click)="showEditParticipantForm()" class="add-participant-button ">Add participant
+  </button>
+
+  <app-user-edit-form *ngIf="isEditParticipantFormShown"></app-user-edit-form>
+</div>

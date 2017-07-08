@@ -1,0 +1,13 @@
+<div>
+  <h2>Please enter user info:</h2>
+  <div>
+    <label>name first: </label>
+    <input [(ngModel)]="user.nameFirst" placeholder="name first" />
+  </div>
+  <div>
+    <label>name last: </label>
+    <input [(ngModel)]="user.nameLast" placeholder="name last" />
+  </div>
+  <button (click)="cancel()">Cancel</button>
+  <button (click)="submit()">Save</button>
+</div>
