@@ -3,6 +3,9 @@
   <h1>
     Welcome to {{title}}
   </h1>
-  <app-dashboard></app-dashboard>
+  <nav>
+    <a routerLink="/dashboard" *ngIf="showCreatePartyButton()">Create a party</a>
+  </nav>
+  <router-outlet></router-outlet>
 </div>
 

@@ -10,6 +10,10 @@ export class DashboardComponent implements OnInit {
 
   isEditParticipantFormShown: boolean = false;
 
+  submit(){}
+  cancel(){
+    this.isEditParticipantFormShown = false;
+  }
   constructor() {
   }
 

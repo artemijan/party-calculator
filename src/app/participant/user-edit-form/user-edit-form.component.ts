@@ -11,14 +11,6 @@ export class UserEditFormComponent implements OnInit {
   constructor() {
   }
 
-  cancel() {
-
-  }
-
-  submit() {
-
-  }
-
   @Input() user: User;
 
   ngOnInit() {

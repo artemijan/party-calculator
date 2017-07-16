@@ -1,6 +1,11 @@
 <div class="dashboard">
-  <button md-button disableRipple (click)="showEditParticipantForm()" class="add-participant-button ">Add participant
+  <button md-button disableRipple (click)="showEditParticipantForm()" class="add-participant-button "
+          *ngIf="!isEditParticipantFormShown">Add a participant
   </button>
 
   <app-user-edit-form *ngIf="isEditParticipantFormShown"></app-user-edit-form>
+  <div class="actions" *ngIf="isEditParticipantFormShown">
+    <button (click)="cancel()">Cancel</button>
+    <button (click)="submit()">Save</button>
+  </div>
 </div>

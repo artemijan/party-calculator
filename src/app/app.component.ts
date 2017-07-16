@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,13 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Party calculator.';
+
+  constructor(private route: ActivatedRoute, private location: Location) {
+    this.location = location;
+    this.route = route;
+  }
+
+  showCreatePartyButton() {
+    return ['/', ''].indexOf(this.location.path()) > -1;
+  }
 }
