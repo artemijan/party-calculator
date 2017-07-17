@@ -3,7 +3,7 @@ import {NgModule} from '@angular/core';
 
 import {AppComponent} from './app.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
-import {ParticipantModule} from './participant/participant.module';
+import {MemberModule} from './member/member.module';
 import {RouterModule} from '@angular/router';
 import {FormsModule} from '@angular/forms';
 import {GoodModule} from './good/good.module';
@@ -21,7 +21,7 @@ import {GoodModule} from './good/good.module';
       }
     ]),
     BrowserModule,
-    ParticipantModule,
+    MemberModule,
     GoodModule,
     FormsModule
   ],
