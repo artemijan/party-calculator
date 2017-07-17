@@ -5,23 +5,20 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
+  title = 'Party calculator';
+  isEditParticipantFormShown = false;
 
-  title = "Party calculator";
+  constructor() { }
 
-  isEditParticipantFormShown: boolean = false;
+  ngOnInit() { }
 
-  submit(){}
-  cancel(){
+  submit() { }
+
+  cancel() {
     this.isEditParticipantFormShown = false;
-  }
-  constructor() {
   }
 
   showEditParticipantForm() {
     this.isEditParticipantFormShown = true;
   }
-
-  ngOnInit() {
-  }
-
 }
