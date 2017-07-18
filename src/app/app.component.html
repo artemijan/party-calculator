@@ -1,11 +1,14 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div style="text-align:center">
-  <h1>
-    Welcome to {{title}}
-  </h1>
+  <md-toolbar color="primary">
+    <span>{{title}}</span>
+  </md-toolbar>
   <nav>
-    <a routerLink="/dashboard" *ngIf="showCreatePartyButton()">Create a party</a>
+
+    <a md-button color="primary" (click)="onCreateParty()" [routerLink]="['party', newId]" *ngIf="showCreatePartyButton()">Create a party</a>
   </nav>
-  <router-outlet></router-outlet>
+  <div class="container">
+    <router-outlet></router-outlet>
+  </div>
 </div>
 

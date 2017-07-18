@@ -2,7 +2,7 @@
  * Created by arrtem on 7/8/17.
  */
 import {ActionReducer, Action} from '@ngrx/store';
-import {User} from "./user";
+import {User} from './user';
 
 export const ADD_USER = 'ADD_USER';
 

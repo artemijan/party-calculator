@@ -8,7 +8,8 @@ import {Location} from '@angular/common';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Party calculator.';
+  title = 'Party calculator';
+  newId = 1;
 
   constructor(private route: ActivatedRoute, private location: Location) {
     this.location = location;
@@ -17,5 +18,9 @@ export class AppComponent {
 
   showCreatePartyButton() {
     return ['/', ''].indexOf(this.location.path()) > -1;
+  }
+
+  onCreateParty() {
+    this.newId += 1
   }
 }

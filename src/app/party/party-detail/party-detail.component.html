@@ -1,0 +1,12 @@
+<div class="party-detail">
+  <h2>Party No{{partyId}}</h2>
+  <button md-button color="primary" disableRipple (click)="showEditParticipantForm()" class="add-participant-button"
+          *ngIf="!isEditParticipantFormShown">Add a participant
+  </button>
+
+  <app-user-edit-form *ngIf="isEditParticipantFormShown"></app-user-edit-form>
+  <div class="actions" *ngIf="isEditParticipantFormShown">
+    <button md-button color="primary" (click)="cancel()">Cancel</button>
+    <button md-button color="primary" (click)="submit()">Save</button>
+  </div>
+</div>

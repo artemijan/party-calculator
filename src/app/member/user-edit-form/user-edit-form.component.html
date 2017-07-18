@@ -1,11 +1,13 @@
 <div>
   <h2>Please enter user info:</h2>
   <div>
-    <label>name first: </label>
-    <input [(ngModel)]="user.nameFirst" placeholder="name first" />
+    <md-input-container>
+      <input mdInput [(ngModel)]="user.nameFirst" placeholder="First Name" />
+    </md-input-container>
   </div>
   <div>
-    <label>name last: </label>
-    <input [(ngModel)]="user.nameLast" placeholder="name last" />
+    <md-input-container>
+      <input mdInput [(ngModel)]="user.nameLast" placeholder="Last Name" />
+    </md-input-container>
   </div>
 </div>
