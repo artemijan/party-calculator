@@ -1,0 +1,15 @@
+<h2>Please enter user info:</h2>
+<div>
+  <md-input-container>
+    <input mdInput [(ngModel)]="user.nameFirst" placeholder="First Name" />
+  </md-input-container>
+</div>
+<div>
+  <md-input-container>
+    <input mdInput [(ngModel)]="user.nameLast" placeholder="Last Name" />
+  </md-input-container>
+</div>
+<div class="actions">
+  <button md-button color="accent" (click)="cancel()">Cancel</button>
+  <button md-button color="primary" (click)="save()">Save</button>
+</div>

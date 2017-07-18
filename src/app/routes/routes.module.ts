@@ -5,6 +5,7 @@ import {PartyDetailComponent} from '../party/party-detail/party-detail.component
 import {UserEditFormComponent} from '../member/user-edit-form/user-edit-form.component';
 import {DashboardComponent} from '../dashboard/dashboard.component';
 import {PartyCreateFormComponent} from '../party/party-create-form/party-create-form.component';
+import {CreateUserFormComponent} from '../member/create-user-form/create-user-form.component';
 
 @NgModule({
   imports: [
@@ -29,7 +30,7 @@ import {PartyCreateFormComponent} from '../party/party-create-form/party-create-
       },
       {
         path: 'party/:id/member',
-        component: UserEditFormComponent
+        component: CreateUserFormComponent
       }
     ])
   ],

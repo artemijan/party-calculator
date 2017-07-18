@@ -13,6 +13,7 @@ import {PartyModule} from './party/party.module';
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {partyReducer} from './party/reducers';
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
+import {LocalStorageService} from './services/local-storage.service';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,7 @@ import {StoreDevtoolsModule} from '@ngrx/store-devtools';
       maxAge: 5
     })
   ],
-  providers: [],
+  providers: [LocalStorageService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

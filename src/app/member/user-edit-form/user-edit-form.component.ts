@@ -9,10 +9,11 @@ import {User} from '../user';
 export class UserEditFormComponent implements OnInit {
   @Input() user: User;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
-    this.user = new User();
+
   }
 
 }
