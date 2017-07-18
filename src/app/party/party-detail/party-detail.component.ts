@@ -16,7 +16,6 @@ export class PartyDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.party = new Party();
   }
 
 

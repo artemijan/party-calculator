@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Party} from '../party';
 import {Store} from '@ngrx/store';
 import {Location} from '@angular/common';
+import AppState from '../../AppState';
 
 @Component({
   selector: 'app-party-edit-form',
@@ -12,7 +13,7 @@ export class PartyEditFormComponent implements OnInit {
 
   @Input() party: Party;
 
-  constructor(private location: Location, private store: Store<Party[]>) {
+  constructor(private location: Location, private store: Store<AppState>) {
   }
 
   ngOnInit() {

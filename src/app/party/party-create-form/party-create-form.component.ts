@@ -2,7 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {Party} from '../party';
 import {Location} from '@angular/common';
 import {ADD_PARTY} from '../reducers';
-import {Store} from "@ngrx/store";
+import {Store} from '@ngrx/store';
+import AppState from '../../AppState';
 
 @Component({
   selector: 'app-party-create-form',
@@ -13,7 +14,7 @@ export class PartyCreateFormComponent implements OnInit {
 
   party = new Party();
 
-  constructor(private location: Location, private store: Store<Party[]>) {
+  constructor(private location: Location, private store: Store<AppState>) {
   }
 
   ngOnInit() {
@@ -25,6 +26,7 @@ export class PartyCreateFormComponent implements OnInit {
 
   save() {
     this.store.dispatch({type: ADD_PARTY, payload: this.party});
+    this.party = new Party();
   }
 
 }
