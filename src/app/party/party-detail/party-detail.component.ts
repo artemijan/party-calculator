@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
+import {Location} from '@angular/common';
+import {Party} from '../party';
 
 @Component({
   selector: 'app-party-detail',
@@ -7,23 +9,19 @@ import {ActivatedRoute} from '@angular/router';
   styleUrls: ['./party-detail.component.css']
 })
 export class PartyDetailComponent implements OnInit {
-  partyId: number;
-  isEditParticipantFormShown = false;
+  party: Party;
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute, private location: Location) {
+    this.location = location;
+  }
 
   ngOnInit() {
-    this.partyId = +this.route.snapshot.paramMap.get('id');
+    this.party = new Party();
   }
 
-  submit() { }
 
-  cancel() {
-    this.isEditParticipantFormShown = false;
-  }
-
-  showEditParticipantForm() {
-    this.isEditParticipantFormShown = true;
+  goBack() {
+    this.location.back();
   }
 
 }

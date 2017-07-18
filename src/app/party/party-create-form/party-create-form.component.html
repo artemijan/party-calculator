@@ -1,0 +1,12 @@
+<div>
+  <h2>Please enter name for the party:</h2>
+  <div>
+    <md-input-container>
+      <input mdInput [(ngModel)]="party.name" placeholder="Party Name" />
+    </md-input-container>
+  </div>
+  <div class="actions">
+    <button md-button color="accent" (click)="cancel()">Cancel</button>
+    <button md-button color="primary" (click)="save()">Save</button>
+  </div>
+</div>
