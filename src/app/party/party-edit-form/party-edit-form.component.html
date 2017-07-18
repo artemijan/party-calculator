@@ -1,3 +1,12 @@
 <div>
- edit form todo
+  <h2 class="mat-h2">Edit party name:</h2>
+  <div>
+    <md-input-container>
+      <input mdInput [(ngModel)]="party.name" placeholder="Party Name"/>
+    </md-input-container>
+  </div>
+  <div class="actions">
+    <a md-button color="primary" [routerLink]="['/party',party.id]">Cancel</a>
+    <button md-button color="primary" (click)="save()">Save</button>
+  </div>
 </div>

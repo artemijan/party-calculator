@@ -17,16 +17,15 @@ export class PartyService {
   }
 
   getOrLoad() {
-    let me = this;
     if (!this.parties.length) {
       return this.localStorage.getParties()
         .then((parties) => {
-          me.store.dispatch({type: ADD_PARTIES, payload: parties});
+          this.store.dispatch({type: ADD_PARTIES, payload: parties});
           return parties;
         })
     }
     return new Promise((resolve, reject) => {
-      resolve(me.parties);
+      resolve(this.parties);
     })
   }
 

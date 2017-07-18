@@ -1,3 +1,15 @@
 <nav>
   <a md-button color="primary" [routerLink]="['/party']">Create a party</a>
+  <div class="party-list" *ngFor="let party of parties">
+    <a [routerLink]="['/party',party.id]">
+      <md-card class="party-item">
+        <md-card-title>Party:</md-card-title>
+        <md-card-subtitle></md-card-subtitle>
+        <md-card-content>
+          <img md-card-avatar src="assets/beer.png"/>
+          <span>{{party.name}}</span>
+        </md-card-content>
+      </md-card>
+    </a>
+  </div>
 </nav>

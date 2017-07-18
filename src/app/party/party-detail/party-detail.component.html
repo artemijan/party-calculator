@@ -1,17 +1,22 @@
 <div class="party-detail">
-  <button md-button color="primary" (click)="goBack()">Go back</button>
-  <h2>Party: {{party.name}}</h2>
+  <a md-button color="primary" [routerLink]="['/dashboard']">Go back</a>
+  <h2>
+    Party: {{party.name}}
+    <a [routerLink]="['/party',party.id,'edit']" class="">(Edit)</a>
+  </h2>
   <a md-button *ngIf="party.id!==undefined" color="primary" [routerLink]="['member']"
      class="add-participant-button">Add a member</a>
   <div class="user-list" *ngFor="let user of party.members">
-    <md-card class="user-item">
-      <md-card-title>User:</md-card-title>
-      <md-card-subtitle></md-card-subtitle>
-      <md-card-content>
-        <img md-card-avatar src="assets/beer.png"/>
-        <span>{{user.nameFirst}}</span>,
-        <span>{{user.nameLast}}</span>
-      </md-card-content>
-    </md-card>
+    <a [routerLink]="['/party',party.id,'member',user.id]">
+      <md-card class="user-item">
+        <md-card-title>User:</md-card-title>
+        <md-card-subtitle></md-card-subtitle>
+        <md-card-content>
+          <img md-card-avatar src="assets/beer.png"/>
+          <span>{{user.nameFirst}}</span>,
+          <span>{{user.nameLast}}</span>
+        </md-card-content>
+      </md-card>
+    </a>
   </div>
 </div>

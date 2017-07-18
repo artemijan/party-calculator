@@ -6,6 +6,7 @@ import {UserEditFormComponent} from '../member/user-edit-form/user-edit-form.com
 import {DashboardComponent} from '../dashboard/dashboard.component';
 import {PartyCreateFormComponent} from '../party/party-create-form/party-create-form.component';
 import {CreateUserFormComponent} from '../member/create-user-form/create-user-form.component';
+import {PartyEditFormComponent} from '../party/party-edit-form/party-edit-form.component';
 
 @NgModule({
   imports: [
@@ -29,8 +30,16 @@ import {CreateUserFormComponent} from '../member/create-user-form/create-user-fo
         component: PartyDetailComponent
       },
       {
+        path: 'party/:id/edit',
+        component: PartyEditFormComponent
+      },
+      {
         path: 'party/:id/member',
         component: CreateUserFormComponent
+      },
+      {
+        path: 'party/:partyId/member/:userId',
+        component: UserEditFormComponent
       }
     ])
   ],

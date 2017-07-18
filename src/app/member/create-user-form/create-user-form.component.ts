@@ -8,6 +8,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {ADD_MEMBER} from '../../party/reducers';
 import {PartyService} from '../../services/party.service';
 import * as _ from 'underscore';
+import AppState from '../../AppState';
 
 @Component({
   selector: 'app-create-user-form',
@@ -22,7 +23,7 @@ export class CreateUserFormComponent implements OnInit {
   partyIdSubscription: any;
 
   constructor(private route: ActivatedRoute, private location: Location, private router: Router, private partyService: PartyService,
-              private db: LocalStorageService, private store: Store<Party[]>) {
+              private db: LocalStorageService, private store: Store<AppState>) {
   }
 
   ngOnInit() {

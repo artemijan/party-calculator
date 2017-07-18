@@ -2,12 +2,16 @@
   <h2>Please enter user info:</h2>
   <div>
     <md-input-container>
-      <input mdInput [(ngModel)]="user.nameFirst" placeholder="First Name" />
+      <input mdInput [(ngModel)]="user.nameFirst" placeholder="First Name"/>
     </md-input-container>
   </div>
   <div>
     <md-input-container>
-      <input mdInput [(ngModel)]="user.nameLast" placeholder="Last Name" />
+      <input mdInput [(ngModel)]="user.nameLast" placeholder="Last Name"/>
     </md-input-container>
+  </div>
+  <div class="actions">
+    <a md-button color="primary" [routerLink]="['/party',party.id]">Cancel</a>
+    <button md-button color="primary" (click)="save()">Save</button>
   </div>
 </div>

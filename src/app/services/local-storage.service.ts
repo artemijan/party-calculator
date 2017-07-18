@@ -36,7 +36,7 @@ export class LocalStorageService {
     let selectedParty = <Party>_.findWhere(db.parties, {id: partyId});
     user.id = 0;
     if (selectedParty.members.length) {
-      user.id = (<User>_.last(selectedParty.members)).id++;
+      user.id = (<User>_.last(selectedParty.members)).id + 1;
     }
     selectedParty.members.push(user);
     this.setDb(db);
@@ -45,13 +45,38 @@ export class LocalStorageService {
     });
   }
 
+  updateMember(partyId: number, user: User) {
+    let db = this.getDb();
+    let selectedParty = <Party>_.findWhere(db.parties, {id: +partyId});
+    let selectedUser = <User>_.findWhere(selectedParty.members, {id: +user.id});
+    selectedUser.nameLast = user.nameLast;
+    selectedUser.nameFirst = user.nameFirst;
+    this.setDb(db);
+    return new Promise((resolve, reject) => {
+      resolve(user);
+    });
+  }
+
   addParty(party: Party) {
     let db = this.getDb(), id = 0;
-    if (db.parties.lenth) {
-      id = db.parties[db.parties.length - 1].id++;
+    if (db.parties.length) {
+      id = (<Party>_.last(db.parties)).id + 1;
     }
     party.id = id;
     db.parties.push(party);
+    this.setDb(db);
+    return new Promise((resolve, reject) => {
+      resolve(party);
+    });
+  }
+
+  updateParty(party: Party) {
+    let db = this.getDb();
+    let selectedParty = <Party>_.findWhere(db.parties, {id: +party.id});
+    selectedParty.name = party.name;
+    selectedParty.members = party.members;
+    selectedParty.goods = party.goods;
+
     this.setDb(db);
     return new Promise((resolve, reject) => {
       resolve(party);

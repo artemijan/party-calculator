@@ -28,11 +28,10 @@ export class PartyCreateFormComponent implements OnInit {
   }
 
   save() {
-    let me = this;
     this.db.addParty(this.party)
       .then((party: Party) => {
-        me.store.dispatch({type: ADD_PARTY, payload: party});
-        me.router.navigate(['party', party.id]);
+        this.store.dispatch({type: ADD_PARTY, payload: party});
+        this.router.navigate(['party', party.id]);
       });
   }
 

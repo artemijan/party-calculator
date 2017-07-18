@@ -7,7 +7,7 @@ import {MemberModule} from './member/member.module';
 import {RouterModule} from '@angular/router';
 import {FormsModule} from '@angular/forms';
 import {GoodModule} from './good/good.module';
-import {MdButtonModule, MdToolbarModule} from '@angular/material';
+import {MdButtonModule, MdCardModule, MdToolbarModule} from '@angular/material';
 import {RoutesModule} from './routes/routes.module';
 import {PartyModule} from './party/party.module';
 import {DashboardComponent} from './dashboard/dashboard.component';
@@ -30,6 +30,7 @@ import {LocalStorageService} from './services/local-storage.service';
     GoodModule,
     FormsModule,
     MdButtonModule,
+    MdCardModule,
     MdToolbarModule,
     StoreModule.provideStore(partyReducer),
     // Note that you must instrument after importing StoreModule
