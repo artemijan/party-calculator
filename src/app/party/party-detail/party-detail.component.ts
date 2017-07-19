@@ -19,16 +19,14 @@ export class PartyDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.partyIdSubscription = this.route.params.subscribe(params => {
-      let id = params['id'];
-      this.partyService.getOrLoad()
-        .then((parties: Party[]) => {
-          if (!parties.length) {
-            return this.router.navigate(['dashboard']);
-          }
-          this.party = _.findWhere(parties, {id: +id});
-        });
-    });
+    let id = +this.route.snapshot.paramMap.get('id');
+    this.partyService.getOrLoad()
+      .then((parties: Party[]) => {
+        if (!parties.length) {
+          return this.router.navigate(['dashboard']);
+        }
+        this.party = _.findWhere(parties, {id: +id});
+      });
   }
 
   ngOnDestroy() {
