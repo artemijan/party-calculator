@@ -13,7 +13,6 @@ import {PartyService} from '../../services/party.service';
 })
 export class PartyDetailComponent implements OnInit {
   party = new Party();
-  private partyIdSubscription: any;
 
   constructor(private route: ActivatedRoute, private router: Router, private location: Location, private partyService: PartyService) {
   }
@@ -30,7 +29,6 @@ export class PartyDetailComponent implements OnInit {
   }
 
   ngOnDestroy() {
-    this.partyIdSubscription.unsubscribe();
   }
 
   goBack() {

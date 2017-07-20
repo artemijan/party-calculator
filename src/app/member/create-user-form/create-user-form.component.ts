@@ -27,32 +27,27 @@ export class CreateUserFormComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.partyIdSubscription = this.route.params.subscribe(params => {
-      let id = params['id'];
-      this.partyService.getOrLoad()
-        .then((parties: Party[]) => {
-          if (!parties.length) {
-            return this.router.navigate(['dashboard']);
-          }
-          this.party = <Party>_.findWhere(parties, {id: +id});
-        });
-    });
+    const id = +this.route.snapshot.paramMap.get('id');
+
+    this.partyService.getOrLoad()
+      .then((parties: Party[]) => {
+        if (!parties.length) {
+          return this.router.navigate(['dashboard']);
+        }
+        this.party = <Party>_.findWhere(parties, {id: +id});
+      });
   }
 
   cancel() {
     this.location.back();
   }
 
-  ngOnDestroy() {
-    this.partyIdSubscription.unsubscribe();
-  }
 
   save() {
-    let me = this;
     this.db.addMember(this.party.id, this.user)
       .then((user: User) => {
-        me.store.dispatch({type: ADD_MEMBER, payload: {partyId: this.party.id, user: user}});
-        me.router.navigate(['party', this.party.id]);
+        this.store.dispatch({type: ADD_MEMBER, payload: {partyId: this.party.id, user: user}});
+        this.router.navigate(['party', this.party.id]);
       });
   }
 }

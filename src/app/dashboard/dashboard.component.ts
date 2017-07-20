@@ -18,7 +18,6 @@ export class DashboardComponent implements OnInit {
     this.partyService.getOrLoad()
       .then((parties: Party[]) => {
         this.parties = parties;
-        console.log(parties);
       });
 
   }

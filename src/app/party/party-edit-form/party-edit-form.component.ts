@@ -19,23 +19,20 @@ import {UPDATE_PARTY} from '../reducers';
 export class PartyEditFormComponent implements OnInit {
 
   party: Party = new Party();
-  partyIdSubscription: any;
 
   constructor(private location: Location, private store: Store<AppStore>, private partyService: PartyService,
               private route: ActivatedRoute, private router: Router, private db: LocalStorageService) {
   }
 
   ngOnInit() {
-    this.partyIdSubscription = this.route.params.subscribe(params => {
-      let partyId = params['id'];
-      this.partyService.getOrLoad()
-        .then((parties: Party[]) => {
-          this.party = <Party>_.findWhere(parties, {id: +partyId});
-          if (!parties.length || !this.party) {
-            return this.router.navigate(['dashboard']);
-          }
-        });
-    });
+    const partyId = +this.route.snapshot.paramMap.get('id');
+    this.partyService.getOrLoad()
+      .then((parties: Party[]) => {
+        this.party = <Party>_.findWhere(parties, {id: +partyId});
+        if (!parties.length || !this.party) {
+          return this.router.navigate(['dashboard']);
+        }
+      });
   }
 
   save() {
