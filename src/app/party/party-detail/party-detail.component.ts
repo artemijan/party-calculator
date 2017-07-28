@@ -13,12 +13,15 @@ import {PartyService} from '../../services/party.service';
 })
 export class PartyDetailComponent implements OnInit {
   party = new Party();
+  tab: number;
+  tabs = [0, 1];
 
   constructor(private route: ActivatedRoute, private router: Router, private location: Location, private partyService: PartyService) {
   }
 
   ngOnInit() {
     let id = +this.route.snapshot.paramMap.get('id');
+    this.tab = +this.route.snapshot.paramMap.get('tab');
     this.partyService.getOrLoad()
       .then((parties: Party[]) => {
         if (!parties.length) {
@@ -29,6 +32,11 @@ export class PartyDetailComponent implements OnInit {
   }
 
   ngOnDestroy() {
+  }
+
+  onTabChanged(tab) {
+    console.log(tab);
+    this.location.replaceState("party/" + this.party.id + "/tab/" + tab);
   }
 
   goBack() {

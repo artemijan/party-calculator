@@ -1,3 +1,12 @@
-<p>
-  good-item-edit-form works!
-</p>
+<div>
+  <h2>Please enter Good info:</h2>
+  <div>
+    <md-input-container>
+      <input mdInput [(ngModel)]="good.name" placeholder="Good Name" />
+    </md-input-container>
+  </div>
+  <div class="actions">
+    <a md-button color="primary" [routerLink]="['/party',party.id,'tab',1]">Cancel</a>
+    <button md-button color="primary" (click)="save()">Save</button>
+  </div>
+</div>

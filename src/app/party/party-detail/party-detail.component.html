@@ -1,22 +1,52 @@
-<div class="party-detail">
+<div class="party-detail-component">
   <a md-button color="primary" [routerLink]="['/dashboard']">Go back</a>
   <h2>
     Party: {{party.name}}
     <a [routerLink]="['/party',party.id,'edit']" class="">(Edit)</a>
   </h2>
-  <a md-button *ngIf="party.id!==undefined" color="primary" [routerLink]="['member']"
-     class="add-participant-button">Add a member</a>
-  <div class="user-list" *ngFor="let user of party.members">
-    <a [routerLink]="['/party',party.id,'member',user.id]">
-      <md-card class="user-item">
-        <md-card-title>User:</md-card-title>
-        <md-card-subtitle></md-card-subtitle>
-        <md-card-content>
-          <img md-card-avatar src="assets/beer.png"/>
-          <span>{{user.nameFirst}}</span>,
-          <span>{{user.nameLast}}</span>
-        </md-card-content>
-      </md-card>
-    </a>
-  </div>
+
+  <md-tab-group class="party-tabs" [selectedIndex]="tab" (selectedIndexChange)="onTabChanged()">
+    <md-tab label="Party Members">
+      <div class="actions-container">
+        <a md-button *ngIf="party.id!==undefined" color="primary" [routerLink]="['/party',party.id,'member']"
+           class="add-item-button">Add a member</a>
+      </div>
+      <div class="list-container">
+        <div class="list" *ngFor="let user of party.members">
+          <a [routerLink]="['/party',party.id,'member',user.id]">
+            <md-card class="user-item">
+              <md-card-title>User:</md-card-title>
+              <md-card-subtitle></md-card-subtitle>
+              <md-card-content>
+                <img md-card-avatar src="assets/beer.png" />
+                <span>{{user.nameFirst}}</span>,
+                <span>{{user.nameLast}}</span>
+              </md-card-content>
+            </md-card>
+          </a>
+        </div>
+      </div>
+    </md-tab>
+    <md-tab label="Goods">
+      <div class="actions-container">
+        <a md-button *ngIf="party.id!==undefined" color="primary" [routerLink]="['/party',party.id,'good']"
+           class="add-item-button">Add goods</a>
+      </div>
+      <div class="list-container">
+        <div class="list" *ngFor="let good of party.goods">
+          <a [routerLink]="['/party',party.id,'good', good.id]">
+            <md-card class="good-item">
+              <md-card-title>Good:</md-card-title>
+              <md-card-subtitle></md-card-subtitle>
+              <md-card-content>
+                <img md-card-avatar src="assets/beer.png" />
+                <span>{{good.name}}</span>
+              </md-card-content>
+            </md-card>
+          </a>
+        </div>
+      </div>
+    </md-tab>
+  </md-tab-group>
+
 </div>

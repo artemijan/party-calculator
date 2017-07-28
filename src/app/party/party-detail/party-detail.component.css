@@ -1,3 +1,29 @@
-.user-item{
-  margin-bottom: 10px;
+.list {
+  margin: 10px;
+  width: 250px;
+  display: inline-block;
+}
+
+.list-container {
+  text-align: left;
+}
+
+.actions-container {
+  text-align: left;
+}
+
+.add-item-button {
+  margin-left: 10px;
+}
+
+.party-detail-component h2 > a {
+  font-size: 14px;
+}
+
+.mat-card-title {
+  font-size: 18px;
+}
+
+.actions-container{
+  margin-top: 10px;
 }

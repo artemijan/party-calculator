@@ -5,7 +5,7 @@ import {MemberModule} from '../member/member.module'
 import {RouterModule} from '@angular/router';
 import {PartyEditFormComponent} from './party-edit-form/party-edit-form.component';
 import {FormsModule} from '@angular/forms';
-import {MdInputModule, MdButtonModule, MdCardModule} from '@angular/material';
+import {MdInputModule, MdButtonModule, MdCardModule, MdTabsModule} from '@angular/material';
 import { PartyCreateFormComponent } from './party-create-form/party-create-form.component';
 @NgModule({
   imports: [
@@ -15,7 +15,8 @@ import { PartyCreateFormComponent } from './party-create-form/party-create-form.
     FormsModule,
     MdInputModule,
     MdButtonModule,
-    MdCardModule
+    MdCardModule,
+    MdTabsModule
   ],
   exports: [PartyDetailComponent, PartyEditFormComponent],
   declarations: [PartyDetailComponent, PartyEditFormComponent, PartyCreateFormComponent]

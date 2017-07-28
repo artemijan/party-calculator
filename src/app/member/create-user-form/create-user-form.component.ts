@@ -20,8 +20,6 @@ export class CreateUserFormComponent implements OnInit {
   user = new User();
   party = new Party();
 
-  partyIdSubscription: any;
-
   constructor(private route: ActivatedRoute, private location: Location, private router: Router, private partyService: PartyService,
               private db: LocalStorageService, private store: Store<AppState>) {
   }
@@ -47,7 +45,7 @@ export class CreateUserFormComponent implements OnInit {
     this.db.addMember(this.party.id, this.user)
       .then((user: User) => {
         this.store.dispatch({type: ADD_MEMBER, payload: {partyId: this.party.id, user: user}});
-        this.router.navigate(['party', this.party.id]);
+        this.router.navigate(['party', this.party.id, 'tab', 0]);
       });
   }
 }

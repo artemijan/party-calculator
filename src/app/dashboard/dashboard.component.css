@@ -1,3 +1,19 @@
-.party-item{
-  margin-bottom: 10px;
+.party-list-item {
+  margin: 10px;
+  width: 250px;
+  display: inline-block;
+}
+
+.create-party-button {
+  margin-left: 10px;
+}
+
+.dashboard-container{
+  text-align: left;
+}
+.party-list-item-container{
+
+}
+.mat-card-title {
+  font-size: 18px;
 }

@@ -3,6 +3,7 @@ import {Party} from '../party/party';
 import {User} from '../member/user';
 import * as _ from 'underscore';
 import {AppStore} from '../app-store';
+import {Good} from '../good/good';
 
 @Injectable()
 export class LocalStorageService {
@@ -45,6 +46,20 @@ export class LocalStorageService {
     });
   }
 
+  addGood(partyId: number, good: Good) {
+    let db = this.getDb();
+    let selectedParty = <Party>_.findWhere(db.parties, {id: partyId});
+    good.id = 0;
+    if (selectedParty.goods.length) {
+      good.id = (<Good>_.last(selectedParty.goods)).id + 1;
+    }
+    selectedParty.goods.push(good);
+    this.setDb(db);
+    return new Promise((resolve, reject) => {
+      resolve(good);
+    });
+  }
+
   updateMember(partyId: number, user: User) {
     let db = this.getDb();
     let selectedParty = <Party>_.findWhere(db.parties, {id: +partyId});
@@ -54,6 +69,17 @@ export class LocalStorageService {
     this.setDb(db);
     return new Promise((resolve, reject) => {
       resolve(user);
+    });
+  }
+
+  updateGood(partyId: number, good: Good) {
+    let db = this.getDb();
+    let selectedParty = <Party>_.findWhere(db.parties, {id: +partyId});
+    let selectedGood = <Good>_.findWhere(selectedParty.goods, {id: +good.id});
+    selectedGood.name = good.name;
+    this.setDb(db);
+    return new Promise((resolve, reject) => {
+      resolve(good);
     });
   }
 
