@@ -1,7 +1,7 @@
 /**
  * Created by arrtem on 7/8/17.
  */
-import {ActionReducer, Action} from '@ngrx/store';
+import {Action} from '@ngrx/store';
 import {AppStore} from '../app-store';
 
 export const ADD_PARTY = 'ADD_PARTY';
@@ -11,6 +11,9 @@ export const ADD_MEMBER = 'ADD_MEMBER';
 export const UPDATE_MEMBER = 'UPDATE_MEMBER';
 export const UPDATE_GOOD = 'UPDATE_GOOD';
 export const ADD_GOOD = 'ADD_GOOD';
+export const DELETE_GOOD = 'DELETE_GOOD';
+export const DELETE_MEMBER = 'DELETE_MEMBER';
+export const DELETE_PARTY = 'DELETE_PARTY';
 
 export function partyReducer(state: AppStore = {parties: []}, action: Action) {
   switch (action.type) {
@@ -23,6 +26,10 @@ export function partyReducer(state: AppStore = {parties: []}, action: Action) {
         ...state, parties: state.parties.map(party => party.id === action.payload.id ? {
           ...party, name: action.payload.name, members: action.payload.members, goods: action.payload.goods
         } : party)
+      };
+    case DELETE_PARTY:
+      return {
+        ...state, parties: state.parties.filter(party => party.id !== action.payload.partyId)
       };
     case ADD_MEMBER:
       return {
@@ -44,6 +51,14 @@ export function partyReducer(state: AppStore = {parties: []}, action: Action) {
           } : party
         )
       };
+    case DELETE_MEMBER:
+      return {
+        ...state, parties: state.parties.map(party => party.id === action.payload.partyId ?
+          {
+            ...party, members: party.members.filter(member => member.id !== action.payload.memberId)
+          } : party
+        )
+      };
     case UPDATE_GOOD:
       return {
         ...state, parties: state.parties.map(party => party.id === action.payload.partyId ?
@@ -61,6 +76,14 @@ export function partyReducer(state: AppStore = {parties: []}, action: Action) {
         ...state, parties: state.parties.map(party => party.id === action.payload.partyId ?
           {
             ...party, goods: [...party.goods, action.payload.good]
+          } : party
+        )
+      };
+    case DELETE_GOOD:
+      return {
+        ...state, parties: state.parties.map(party => party.id === action.payload.partyId ?
+          {
+            ...party, goods: party.goods.filter(good => good.id !== action.payload.goodId)
           } : party
         )
       };
