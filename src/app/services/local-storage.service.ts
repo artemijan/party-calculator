@@ -72,6 +72,23 @@ export class LocalStorageService {
     });
   }
 
+  deleteMember(partyId: number, memberId: number) {
+    let db = this.getDb();
+    let deletedMember;
+    let selectedParty = <Party>_.findWhere(db.parties, {id: +partyId});
+    selectedParty.members = _.filter(<Array<User>>selectedParty.members, member => {
+      if (member.id !== +memberId) {
+        deletedMember = member;
+        return false;
+      }
+      return true;
+    });
+    this.setDb(db);
+    return new Promise((resolve, reject) => {
+      resolve(deletedMember)
+    });
+  }
+
   updateGood(partyId: number, good: Good) {
     let db = this.getDb();
     let selectedParty = <Party>_.findWhere(db.parties, {id: +partyId});
@@ -80,6 +97,23 @@ export class LocalStorageService {
     this.setDb(db);
     return new Promise((resolve, reject) => {
       resolve(good);
+    });
+  }
+
+  deleteGood(partyId: number, goodId: number) {
+    let db = this.getDb();
+    let deletedGood;
+    let selectedParty = <Party>_.findWhere(db.parties, {id: +partyId});
+    selectedParty.goods = _.filter(<Array<Good>>selectedParty.goods, good => {
+      if (good.id !== +goodId) {
+        deletedGood = good;
+        return false;
+      }
+      return true;
+    });
+    this.setDb(db);
+    return new Promise((resolve, reject) => {
+      resolve(deletedGood)
     });
   }
 
@@ -106,6 +140,22 @@ export class LocalStorageService {
     this.setDb(db);
     return new Promise((resolve, reject) => {
       resolve(party);
+    });
+  }
+
+  deleteParty(partyId: number) {
+    let db = this.getDb();
+    let deletedParty;
+    db.parties = _.filter(<Array<Party>>db.parties, party => {
+      if (party.id !== partyId) {
+        deletedParty = party;
+        return false;
+      }
+      return true;
+    });
+    this.setDb(db);
+    return new Promise((resolve, reject) => {
+      resolve(deletedParty)
     });
   }
 
