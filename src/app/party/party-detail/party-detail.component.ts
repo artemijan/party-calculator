@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Location} from '@angular/common';
 import {Party} from '../party';
@@ -13,15 +13,23 @@ import {PartyService} from '../../services/party.service';
 })
 export class PartyDetailComponent implements OnInit {
   party = new Party();
-  tab: number;
-  tabs = [0, 1];
+  navLinks;
 
   constructor(private route: ActivatedRoute, private router: Router, private location: Location, private partyService: PartyService) {
   }
 
   ngOnInit() {
     let id = +this.route.snapshot.paramMap.get('id');
-    this.tab = +this.route.snapshot.paramMap.get('tab');
+    this.navLinks = [
+      {
+        state: ["/party", id, 'members'],
+        label: "Members"
+      },
+      {
+        state: ["/party", id, 'goods'],
+        label: "Goods"
+      }
+    ];
     this.partyService.getOrLoad()
       .then((parties: Party[]) => {
         if (!parties.length) {
@@ -32,11 +40,6 @@ export class PartyDetailComponent implements OnInit {
   }
 
   ngOnDestroy() {
-  }
-
-  onTabChanged(tab) {
-    console.log(tab);
-    this.location.replaceState("party/" + this.party.id + "/tab/" + tab);
   }
 
   goBack() {

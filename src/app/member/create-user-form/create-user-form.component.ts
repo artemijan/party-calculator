@@ -45,7 +45,7 @@ export class CreateUserFormComponent implements OnInit {
     this.db.addMember(this.party.id, this.user)
       .then((user: User) => {
         this.store.dispatch({type: ADD_MEMBER, payload: {partyId: this.party.id, user: user}});
-        this.router.navigate(['party', this.party.id, 'tab', 0]);
+        this.router.navigate(['party', this.party.id, 'members']);
       });
   }
 }

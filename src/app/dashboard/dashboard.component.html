@@ -2,7 +2,7 @@
   <a md-button class="create-party-button" color="primary" [routerLink]="['/party']">Create a party</a>
   <div class="party-list-item-container">
     <div class="party-list-item" *ngFor="let party of parties">
-      <a [routerLink]="['/party',party.id,'tab',0]">
+      <a [routerLink]="['/party',party.id,'members']">
         <md-card class="party-item">
           <md-card-title>Party:</md-card-title>
           <md-card-subtitle></md-card-subtitle>

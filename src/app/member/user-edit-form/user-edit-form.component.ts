@@ -44,7 +44,7 @@ export class UserEditFormComponent implements OnInit {
     this.db.updateMember(this.party.id, this.user)
       .then((user: User) => {
         this.store.dispatch({type: UPDATE_MEMBER, payload: {partyId: this.party.id, user: user}});
-        this.router.navigate(['party', this.party.id]);
+        this.router.navigate(['party', this.party.id,'members']);
       });
   }
 

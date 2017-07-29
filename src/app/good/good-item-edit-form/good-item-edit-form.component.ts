@@ -44,7 +44,7 @@ export class GoodItemEditFormComponent implements OnInit {
     this.db.updateGood(this.party.id, this.good)
       .then((good: Good) => {
         this.store.dispatch({type: UPDATE_GOOD, payload: {partyId: this.party.id, good: good}});
-        this.router.navigate(['party', this.party.id]);
+        this.router.navigate(['party', this.party.id, 'goods']);
       });
   }
 }

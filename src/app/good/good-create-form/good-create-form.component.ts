@@ -42,7 +42,7 @@ export class GoodCreateFormComponent implements OnInit {
     this.db.addGood(this.party.id, this.good)
       .then((good: Good) => {
         this.store.dispatch({type: ADD_GOOD, payload: {partyId: this.party.id, good: good}});
-        this.router.navigate(['party', this.party.id, 'tab', 1]);
+        this.router.navigate(['party', this.party.id, 'goods']);
       });
   }
 

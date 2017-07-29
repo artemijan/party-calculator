@@ -9,6 +9,8 @@ import {CreateUserFormComponent} from '../member/create-user-form/create-user-fo
 import {PartyEditFormComponent} from '../party/party-edit-form/party-edit-form.component';
 import {GoodCreateFormComponent} from '../good/good-create-form/good-create-form.component';
 import {GoodItemEditFormComponent} from '../good/good-item-edit-form/good-item-edit-form.component';
+import {MembersListComponent} from '../member/members-list/members-list.component';
+import {GoodsListComponent} from '../good/goods-list/goods-list.component';
 
 @NgModule({
   imports: [
@@ -28,8 +30,18 @@ import {GoodItemEditFormComponent} from '../good/good-item-edit-form/good-item-e
         component: PartyCreateFormComponent
       },
       {
-        path: 'party/:id/tab/:tab',
-        component: PartyDetailComponent
+        path: 'party/:id',
+        component: PartyDetailComponent,
+        children: [
+          {
+            path: 'members',
+            component: MembersListComponent
+          },
+          {
+            path: 'goods',
+            component: GoodsListComponent
+          }
+        ]
       },
       {
         path: 'party/:id/edit',

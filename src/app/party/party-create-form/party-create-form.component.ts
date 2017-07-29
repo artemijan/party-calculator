@@ -31,7 +31,7 @@ export class PartyCreateFormComponent implements OnInit {
     this.db.addParty(this.party)
       .then((party: Party) => {
         this.store.dispatch({type: ADD_PARTY, payload: party});
-        this.router.navigate(['party', party.id]);
+        this.location.back();
       });
   }
 

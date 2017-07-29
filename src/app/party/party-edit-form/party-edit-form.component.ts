@@ -35,11 +35,14 @@ export class PartyEditFormComponent implements OnInit {
       });
   }
 
+  cancel(){
+    this.location.back();
+  }
   save() {
     this.db.updateParty(this.party)
       .then((user: User) => {
         this.store.dispatch({type: UPDATE_PARTY, payload: this.party});
-        this.router.navigate(['party', this.party.id]);
+        this.location.back();
       });
   }
 
