@@ -77,7 +77,7 @@ export class LocalStorageService {
     let deletedMember;
     let selectedParty = <Party>_.findWhere(db.parties, {id: +partyId});
     selectedParty.members = _.filter(<Array<User>>selectedParty.members, member => {
-      if (member.id !== +memberId) {
+      if (member.id === +memberId) {
         deletedMember = member;
         return false;
       }
@@ -105,7 +105,7 @@ export class LocalStorageService {
     let deletedGood;
     let selectedParty = <Party>_.findWhere(db.parties, {id: +partyId});
     selectedParty.goods = _.filter(<Array<Good>>selectedParty.goods, good => {
-      if (good.id !== +goodId) {
+      if (good.id === goodId) {
         deletedGood = good;
         return false;
       }
@@ -147,7 +147,7 @@ export class LocalStorageService {
     let db = this.getDb();
     let deletedParty;
     db.parties = _.filter(<Array<Party>>db.parties, party => {
-      if (party.id !== partyId) {
+      if (party.id === partyId) {
         deletedParty = party;
         return false;
       }

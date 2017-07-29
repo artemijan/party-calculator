@@ -2,16 +2,21 @@
   <a md-button class="create-party-button" color="primary" [routerLink]="['/party']">Create a party</a>
   <div class="party-list-item-container">
     <div class="party-list-item" *ngFor="let party of parties">
-      <a [routerLink]="['/party',party.id,'members']">
-        <md-card class="party-item">
+
+      <md-card class="party-item">
+        <a md-button color="primary" (click)="deleteParty(party)" class="pull-right icon-button">
+          <i class="material-icons">delete forever</i>
+        </a>
+        <a [routerLink]="['/party',party.id,'members']" class="">
           <md-card-title>Party:</md-card-title>
           <md-card-subtitle></md-card-subtitle>
           <md-card-content>
-            <img md-card-avatar src="assets/beer.png" />
+            <img md-card-avatar src="assets/beer.png"/>
             <span>{{party.name}}</span>
           </md-card-content>
-        </md-card>
-      </a>
+        </a>
+      </md-card>
+
     </div>
   </div>
 </nav>

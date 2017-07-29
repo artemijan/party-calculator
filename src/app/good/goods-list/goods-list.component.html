@@ -4,15 +4,20 @@
 </div>
 <div class="list-container">
   <div class="list" *ngFor="let good of party.goods">
-    <a [routerLink]="['/party',party.id,'good', good.id]">
-      <md-card class="good-item">
+
+    <md-card class="good-item">
+      <a md-button color="primary" (click)="deleteGood(good)" class="pull-right icon-button">
+        <i class="material-icons">delete forever</i>
+      </a>
+      <a [routerLink]="['/party',party.id,'good', good.id]">
         <md-card-title>Good:</md-card-title>
         <md-card-subtitle></md-card-subtitle>
         <md-card-content>
           <img md-card-avatar src="assets/beer.png"/>
           <span>{{good.name}}</span>
         </md-card-content>
-      </md-card>
-    </a>
+      </a>
+    </md-card>
+
   </div>
 </div>
