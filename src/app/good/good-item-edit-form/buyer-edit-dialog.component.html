@@ -1,0 +1,14 @@
+<div class="buyer-edit-dialog">
+  <md-select placeholder="Party Member" [(ngModel)]="selectedUser">
+    <md-option *ngFor="let member of members" [value]="member.id">
+      {{ member.nameFirst+', '+member.nameLast }}
+    </md-option>
+  </md-select>
+  <md-input-container>
+    <input mdInput [(ngModel)]="totalPrice" placeholder="Spent Money" />
+  </md-input-container>
+  <div class="actions">
+    <a md-button color="primary" (click)="cancel()">Cancel</a>
+    <button md-button color="primary" (click)="save()">Save</button>
+  </div>
+</div>

@@ -94,6 +94,7 @@ export class LocalStorageService {
     let selectedParty = <Party>_.findWhere(db.parties, {id: +partyId});
     let selectedGood = <Good>_.findWhere(selectedParty.goods, {id: +good.id});
     selectedGood.name = good.name;
+    selectedGood.buyers = good.buyers || [];
     this.setDb(db);
     return new Promise((resolve, reject) => {
       resolve(good);

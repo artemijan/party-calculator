@@ -27,3 +27,20 @@
 .actions-container{
   margin-top: 10px;
 }
+.icon-button{
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+.prop-name{
+  font-weight: bold;
+}
+.add-item-button {
+  margin-left: 10px;
+}
+.buyer-prop{
+  max-height: 30px;
+}
+md-card-subtitle{
+  margin-top: 10px!important;
+}

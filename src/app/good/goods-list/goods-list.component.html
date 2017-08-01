@@ -6,17 +6,21 @@
   <div class="list" *ngFor="let good of party.goods">
 
     <md-card class="good-item">
-      <a md-button color="primary" (click)="deleteGood(good)" class="pull-right icon-button">
+      <a md-button color="primary" (click)="deleteGood(good)" class="icon-button">
         <i class="material-icons">delete forever</i>
       </a>
       <a [routerLink]="['/party',party.id,'good', good.id]">
-        <md-card-title>Good:</md-card-title>
-        <md-card-subtitle></md-card-subtitle>
-        <md-card-content>
-          <img md-card-avatar src="assets/tequila.png"/>
-          <span>{{good.name}}</span>
-        </md-card-content>
+        <md-card-title>Good: {{good.name}}</md-card-title>
       </a>
+      <img md-card-avatar src="assets/tequila.png" />
+      <md-card-subtitle *ngIf="good.buyers&&good.buyers.length>0">Buyers:</md-card-subtitle>
+      <md-card-subtitle *ngIf="!good.buyers||!good.buyers.length">Is free!</md-card-subtitle>
+      <md-card-content>
+        <div *ngFor="let buyer of good.buyers" class="buyer-prop"><span class="prop-name">User:</span>
+          {{memberNamesByIdMap[buyer.userId]}}
+          ({{buyer.totalPrice}}$)
+        </div>
+      </md-card-content>
     </md-card>
 
   </div>

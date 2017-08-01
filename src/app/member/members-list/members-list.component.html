@@ -8,18 +8,18 @@
     <div class="list" *ngFor="let user of party.members">
 
       <md-card class="user-item">
-        <a md-button color="primary" (click)="deleteMember(user)" class="pull-right icon-button">
+        <a md-button color="primary" (click)="deleteMember(user)" class="icon-button">
           <i class="material-icons">delete forever</i>
         </a>
         <a [routerLink]="['/party',party.id,'member',user.id]">
-          <md-card-title>User:</md-card-title>
-          <md-card-subtitle></md-card-subtitle>
-          <md-card-content>
-            <img md-card-avatar src="assets/unknown-user.jpg"/>
-            <span>{{user.nameFirst}}</span>,
-            <span>{{user.nameLast}}</span>
-          </md-card-content>
+          <md-card-title>Party Member</md-card-title>
         </a>
+        <img md-card-avatar src="assets/unknown-user.jpg" />
+        <md-card-subtitle>User details:</md-card-subtitle>
+        <md-card-content>
+          <div class="member-prop"><span class="prop-name">First Name:</span> {{user.nameFirst}}</div>
+          <div class="member-prop"><span class="prop-name">Last Name:</span> {{user.nameLast}}</div>
+        </md-card-content>
       </md-card>
 
     </div>

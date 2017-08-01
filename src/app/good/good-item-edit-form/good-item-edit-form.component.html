@@ -5,6 +5,17 @@
       <input mdInput [(ngModel)]="good.name" placeholder="Good Name" />
     </md-input-container>
   </div>
+  <button md-button color="primary" (click)="addBuyer()"
+          *ngIf="party.members.length!==0&&good.buyers.length<party.members.length">Add Buyer
+  </button>
+  <div class="buyers-list">
+    <div *ngFor="let buyer of good.buyers" class="buyer-item">
+      <div>User {{buyer.userId}}</div>
+      <a md-button color="primary" (click)="deleteBuyer(buyer)" class="icon-button">
+        <i class="material-icons">delete forever</i>
+      </a>
+    </div>
+  </div>
   <div class="actions">
     <a md-button color="primary" [routerLink]="['/party',party.id,'goods']">Cancel</a>
     <button md-button color="primary" (click)="save()">Save</button>

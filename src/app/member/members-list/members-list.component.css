@@ -11,11 +11,23 @@
 .actions-container {
   text-align: left;
 }
-
+.icon-button{
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+.prop-name{
+  font-weight: bold;
+}
 .add-item-button {
   margin-left: 10px;
 }
-
+.member-prop{
+  max-height: 30px;
+}
+md-card-subtitle{
+  margin-top: 10px!important;
+}
 .party-detail-component h2 > a {
   font-size: 14px;
 }

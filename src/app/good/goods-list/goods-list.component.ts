@@ -17,6 +17,7 @@ import {DELETE_GOOD} from '../../party/reducers';
 })
 export class GoodsListComponent implements OnInit {
   party = new Party();
+  memberNamesByIdMap = {};
 
   constructor(private route: ActivatedRoute, private router: Router, private partyService: PartyService,
               private db: LocalStorageService, private store: Store<AppState>) {
@@ -30,6 +31,7 @@ export class GoodsListComponent implements OnInit {
           return this.router.navigate(['dashboard']);
         }
         this.party = _.findWhere(parties, {id: +id});
+        this.memberNamesByIdMap = _.mapObject(this.party.members, member => member.nameFirst + ', ' + member.nameLast);
       });
   }
 
