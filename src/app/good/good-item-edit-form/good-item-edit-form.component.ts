@@ -10,6 +10,7 @@ import * as _ from 'underscore';
 import {UPDATE_GOOD} from '../../party/reducers';
 import {MdDialog, MdDialogRef} from '@angular/material';
 import {MD_DIALOG_DATA} from '@angular/material';
+import {User} from '../../member/user';
 
 @Component({
   selector: 'app-good-item-edit-form',
@@ -21,12 +22,14 @@ export class GoodItemEditFormComponent implements OnInit {
 
   good = new Good();
   party = new Party();
+  buyerMembers: Array<any>;
 
   constructor(private db: LocalStorageService, private partyService: PartyService, private route: ActivatedRoute,
               private router: Router, private store: Store<AppState>, public dialog: MdDialog) {
   }
 
   ngOnInit() {
+    this.buyerMembers = [];
     const partyId = +this.route.snapshot.paramMap.get('partyId');
     const goodId = +this.route.snapshot.paramMap.get('goodId');
     this.partyService.getOrLoad()
@@ -41,6 +44,22 @@ export class GoodItemEditFormComponent implements OnInit {
         this.good = <Good>_.findWhere(this.party.goods, {id: +goodId});
         if (!this.good.buyers) {
           this.good.buyers = [];
+        } else {
+          let userIdsToRemove = [];
+          this.buyerMembers = this.good.buyers.filter(buyer => {
+            let user = <User>_.findWhere(this.party.members, {id: +buyer.userId});
+            if (!user) {
+              userIdsToRemove.push(buyer.userId);
+            }
+            return !!user;
+          }).map(buyer => {
+            let user = <User>_.findWhere(this.party.members, {id: +buyer.userId});
+            return _.extend({}, buyer, user);
+          });
+          //todo: remove it when backend will be available
+          this.good.buyers = this.good.buyers.filter(buyer => userIdsToRemove.indexOf(buyer.userId) < 0);
+          this.db.updateGood(this.party.id, this.good)
+            .then((good: Good) => this.good = good);
         }
       });
   }
@@ -48,7 +67,9 @@ export class GoodItemEditFormComponent implements OnInit {
   addBuyer() {
     let dialogRef = this.dialog.open(BuyerEditDialog, {data: {party: this.party, good: this.good}});
     dialogRef.afterClosed().subscribe(result => {
-      this.good.buyers.push(<Buyer>result);
+      var user = _.findWhere(this.party.members, {id: +result.userId});
+      this.buyerMembers.push(_.extend({}, result, user));
+      this.good.buyers.push(result);
     });
   }
 
