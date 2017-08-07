@@ -45,7 +45,10 @@ export function partyReducer(state: AppStore = {parties: []}, action: Action) {
           {
             ...party, members: party.members.map(member => member.id === action.payload.user.id ?
             {
-              ...member, nameFirst: action.payload.user.nameFirst, nameLast: action.payload.user.nameLast
+              ...member,
+              nameFirst: action.payload.user.nameFirst,
+              nameLast: action.payload.user.nameLast,
+              partyGoods: action.payload.user.partyGoods
             } : member
           )
           } : party

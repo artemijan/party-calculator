@@ -2,13 +2,21 @@
   <h2>Please enter user info:</h2>
   <div>
     <md-input-container>
-      <input mdInput [(ngModel)]="user.nameFirst" placeholder="First Name" />
+      <input mdInput [(ngModel)]="user.nameFirst" placeholder="First Name"/>
     </md-input-container>
   </div>
   <div>
     <md-input-container>
-      <input mdInput [(ngModel)]="user.nameLast" placeholder="Last Name" />
+      <input mdInput [(ngModel)]="user.nameLast" placeholder="Last Name"/>
     </md-input-container>
+  </div>
+  <h3>Used goods:</h3>
+  <div class="goods-list">
+    <div class="good-item" *ngFor="let partyGood of party.goods">
+      <md-input-container>
+        <input mdInput [(ngModel)]="partyGoods[partyGood.id]" placeholder="{{partyGood.name}} Count"/>
+      </md-input-container>
+    </div>
   </div>
   <div class="actions">
     <a md-button color="primary" [routerLink]="['/party',party.id,'members']">Cancel</a>

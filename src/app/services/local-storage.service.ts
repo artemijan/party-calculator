@@ -66,6 +66,7 @@ export class LocalStorageService {
     let selectedUser = <User>_.findWhere(selectedParty.members, {id: +user.id});
     selectedUser.nameLast = user.nameLast;
     selectedUser.nameFirst = user.nameFirst;
+    selectedUser.partyGoods = user.partyGoods;
     this.setDb(db);
     return new Promise((resolve, reject) => {
       resolve(user);
