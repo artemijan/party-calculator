@@ -75,6 +75,7 @@ export class GoodItemEditFormComponent implements OnInit {
 
   deleteBuyer(buyer) {
     this.good.buyers = this.good.buyers.filter(buyerObj => buyer.userId !== buyerObj.userId);
+    this.buyerMembers = this.buyerMembers.filter(buyerObj => buyer.userId !== buyerObj.userId)
   }
 
   save() {
