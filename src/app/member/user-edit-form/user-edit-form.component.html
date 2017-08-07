@@ -10,7 +10,7 @@
       <input mdInput [(ngModel)]="user.nameLast" placeholder="Last Name"/>
     </md-input-container>
   </div>
-  <h3>Used goods:</h3>
+  <h3 *ngIf="party.goods&&party.goods.length">Used goods:</h3>
   <div class="goods-list">
     <div class="good-item" *ngFor="let partyGood of party.goods">
       <md-input-container>
