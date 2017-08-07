@@ -49,11 +49,16 @@ export class UserEditFormComponent implements OnInit {
 
   save() {
     _.each(this.partyGoods, (partyGoodCount, partyGoodId) => {
-      let partyGood = new PartyGood();
+      let partyGood = new PartyGood(), userPartyGood;
       partyGood.goodId = +partyGoodId;
       partyGood.goodCount = +partyGoodCount;
       if (partyGood.goodCount) {
-        this.user.partyGoods.push(partyGood);
+        userPartyGood = _.findWhere(this.user.partyGoods, {goodId: +partyGoodId});
+        if (userPartyGood) {
+          userPartyGood.goodCount = partyGood.goodCount;
+        } else {
+          this.user.partyGoods.push(partyGood);
+        }
       }
     });
     this.db.updateMember(this.party.id, this.user)
