@@ -11,6 +11,7 @@ import {GoodCreateFormComponent} from '../good/good-create-form/good-create-form
 import {GoodItemEditFormComponent} from '../good/good-item-edit-form/good-item-edit-form.component';
 import {MembersListComponent} from '../member/members-list/members-list.component';
 import {GoodsListComponent} from '../good/goods-list/goods-list.component';
+import {PartyCalculationsComponent} from '../party/party-calculations/party-calculations.component';
 
 @NgModule({
   imports: [
@@ -40,6 +41,10 @@ import {GoodsListComponent} from '../good/goods-list/goods-list.component';
           {
             path: 'goods',
             component: GoodsListComponent
+          },
+          {
+            path: 'calculations',
+            component: PartyCalculationsComponent
           }
         ]
       },

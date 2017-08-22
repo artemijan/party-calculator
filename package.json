@@ -25,8 +25,11 @@
     "@angular/router": "^4.3.0",
     "@ngrx/core": "^1.2.0",
     "@ngrx/store": "^2.2.3",
+    "@types/jsplumb": "^1.3.31",
     "@types/underscore": "^1.8.1",
     "core-js": "^2.4.1",
+    "gojs": "^1.7.19",
+    "jsplumb": "^2.5.0",
     "rxjs": "^5.4.2",
     "underscore": "^1.8.3",
     "zone.js": "^0.8.14"

@@ -7,6 +7,7 @@ import {PartyEditFormComponent} from './party-edit-form/party-edit-form.componen
 import {FormsModule} from '@angular/forms';
 import {MdInputModule, MdButtonModule, MdCardModule, MdTabsModule} from '@angular/material';
 import { PartyCreateFormComponent } from './party-create-form/party-create-form.component';
+import { PartyCalculationsComponent } from './party-calculations/party-calculations.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -19,7 +20,7 @@ import { PartyCreateFormComponent } from './party-create-form/party-create-form.
     MdTabsModule
   ],
   exports: [PartyDetailComponent, PartyEditFormComponent],
-  declarations: [PartyDetailComponent, PartyEditFormComponent, PartyCreateFormComponent]
+  declarations: [PartyDetailComponent, PartyEditFormComponent, PartyCreateFormComponent, PartyCalculationsComponent]
 })
 export class PartyModule {
 }

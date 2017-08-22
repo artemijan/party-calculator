@@ -24,23 +24,34 @@
   font-size: 18px;
 }
 
-.actions-container{
+.actions-container {
   margin-top: 10px;
 }
-.icon-button{
+
+.icon-button {
   position: absolute;
   right: 0;
   top: 0;
 }
-.prop-name{
+
+.prop-name {
   font-weight: bold;
 }
+
 .add-item-button {
   margin-left: 10px;
 }
-.buyer-prop{
+
+.buyer-prop {
   max-height: 30px;
 }
-md-card-subtitle{
-  margin-top: 10px!important;
+
+md-card-subtitle {
+  margin-top: 10px !important;
+}
+
+.card-content {
+  height: 30px;
+  line-height: 1;
+  overflow: hidden;
 }

@@ -28,6 +28,10 @@ export class PartyDetailComponent implements OnInit {
       {
         state: ["/party", id, 'goods'],
         label: "Goods"
+      },
+      {
+        state: ["/party", id, "calculations"],
+        label: "Calculations"
       }
     ];
     this.partyService.getOrLoad()

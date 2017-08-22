@@ -13,12 +13,14 @@
         <md-card-title>Good: {{good.name}}</md-card-title>
       </a>
       <img md-card-avatar src="assets/tequila.png" />
-      <md-card-subtitle *ngIf="good.buyers&&good.buyers.length>0">Buyers:</md-card-subtitle>
-      <md-card-subtitle *ngIf="!good.buyers||!good.buyers.length">Is free!</md-card-subtitle>
+      <md-card-subtitle>Buyers:</md-card-subtitle>
       <md-card-content>
-        <div *ngFor="let buyer of good.buyers" class="buyer-prop"><span class="prop-name">User:</span>
-          {{memberNamesByIdMap[buyer.userId]}}
-          ({{buyer.totalPrice}}$)
+        <div class="card-content">
+          <div *ngIf="!good.buyers||!good.buyers.length">There are no buyers yet.</div>
+          <div *ngFor="let buyer of good.buyers.slice(0,2)" class="buyer-prop">
+            {{memberNamesByIdMap[buyer.userId]}}
+            ({{buyer.totalPrice}}$)
+          </div>
         </div>
       </md-card-content>
     </md-card>
