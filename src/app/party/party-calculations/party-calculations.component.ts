@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {PartyService} from '../../services/party.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {LocalStorageService} from '../../services/local-storage.service';
@@ -13,6 +13,7 @@ import {PartyChart} from './partyChart';
   selector: 'app-party-calculations',
   templateUrl: './party-calculations.component.html',
   providers: [PartyService],
+  encapsulation: ViewEncapsulation.None,
   styleUrls: ['./party-calculations.component.css']
 })
 export class PartyCalculationsComponent implements OnInit {
@@ -31,7 +32,7 @@ export class PartyCalculationsComponent implements OnInit {
         if (!parties.length) {
           return this.router.navigate(['dashboard']);
         }
-        this.party = _.findWhere(parties, {id: +id});
+        this.party = Party.fromObject(_.findWhere(parties, {id: +id}));
         this.chart = new PartyChart(this.party, this.containerId);
       });
   }

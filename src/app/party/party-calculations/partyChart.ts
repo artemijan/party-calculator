@@ -1,18 +1,20 @@
-import {insertAfterLastOccurrence} from '@angular/cli/lib/ast-tools';
 import {Party} from '../party';
+import * as $ from 'jquery';
+import {PartyGood, User} from '../../member/user';
+import {Good} from '../../good/good';
+import * as _ from 'underscore';
 
 const jsPlumb = require('jsplumb').jsPlumb;
-const jsPlumbUtil = require('jsplumb').jsPlumbUtil;
 
 export class PartyChart {
   private instance: any;
   private party: Party;
   private conteinerId: string;
 
-  constructor(party: Party, conteinerId) {
+  constructor(party: Party, containerId) {
     let me = this;
     this.party = party;
-    this.conteinerId = conteinerId;
+    this.conteinerId = containerId;
     jsPlumb.ready(function () {
       me.init();
     })
@@ -21,18 +23,10 @@ export class PartyChart {
   getInstance() {
     if (this.instance == null) {
       this.instance = jsPlumb.getInstance({
-        Endpoint: ["Dot", {radius: 2}],
+        Endpoint: ["Dot", {radius: 5, cssClass: 'endpoint'}],
         Connector: "StateMachine",
-        HoverPaintStyle: {stroke: "#1e8151", strokeWidth: 2},
-        ConnectionOverlays: [
-          ["Arrow", {
-            location: 1,
-            id: "arrow",
-            length: 14,
-            foldback: 0.8
-          }],
-          ["Label", {label: "FOO", id: "label", cssClass: "aLabel"}]
-        ],
+        HoverPaintStyle: {strokeStyle: "#F15A29", lineWidth: 2},
+        Anchors: ["TopCenter", "BottomCenter"],
         Container: this.conteinerId
       });
     }
@@ -43,81 +37,113 @@ export class PartyChart {
     let instance = this.getInstance();
     // initialise draggable elements.
     instance.draggable(el);
-
-    instance.makeSource(el, {
-      filter: ".ep",
-      anchor: "Continuous",
-      connectorStyle: {stroke: "#5c96bc", strokeWidth: 2, outlineStroke: "transparent", outlineWidth: 4},
-      connectionType: "basic",
-      extract: {
-        "action": "the-action"
-      },
-      maxConnections: 2,
-      onMaxConnections: function (info, e) {
-        alert("Maximum connections (" + info.maxConnections + ") reached");
-      }
-    });
-
-    instance.makeTarget(el, {
-      dropOptions: {hoverClass: "dragHover"},
-      anchor: "Continuous",
-      allowLoopback: true
-    });
-
-    // this is not part of the core demo functionality; it is a means for the Toolkit edition's wrapped
-    // version of this demo to find out about new nodes being added.
-    //
-    instance.fire("jsPlumbDemoNodeAdded", el);
   };
 
-  newNode(x, y) {
+  newNode(s) {
     let instance = this.getInstance();
-    let d = document.createElement("div");
-    let id = jsPlumbUtil.uuid();
-    d.className = "w";
-    d.id = id;
-    d.innerHTML = id.substring(0, 7) + "<div class=\"ep\"></div>";
-    d.style.left = x + "px";
-    d.style.top = y + "px";
-    instance.getContainer().appendChild(d);
-    this.initNode(d);
+    let d = $(s.template);
+    d.attr("id", s.name);
+    d.css({left: s.position.x, top: s.position.y});
+    instance.getContainer().appendChild(d[0]);
+    this.initNode(d[0]);
     return d;
   };
 
+  getConnectorOptions() {
+    return {
+      connector: "Bezier",
+      paintStyle: {lineWidth: 5, strokeWidth: 2, strokeStyle: "#056", stroke: "black"},
+      hoverPaintStyle: {strokeStyle: "#dbe300"},
+      endpoint: "Blank",
+      anchor: "Continuous",
+      overlays: [["PlainArrow", {location: 1, width: 15, length: 12}]]
+    }
+  }
+
+  getPredefinedPositions() {
+    return [
+      {x: 20, y: 20},
+      {x: 80, y: 170},
+      {x: 220, y: 20},
+      {x: 20, y: 320},
+      {x: 20, y: 420},
+      {x: 320, y: 20}
+    ];
+  }
+
+  convertMemberToSource(member: User, position) {
+    return {
+      name: this.generateId(member.id),
+      position: position,
+      template: "<div class='source-item'>" + member.nameFirst + ", " + member.nameLast + "</div>"
+    };
+  }
+
+  connect = (connection) => {
+    let instance = this.getInstance(), me = this;
+    instance.connect({
+      source: me.generateId(connection.from),
+      label: connection.count + " $",
+      target: me.generateId(connection.to)
+    }, me.getConnectorOptions());
+  };
+
+  generateId(id) {
+    return "chart-item-" + id;
+  }
+
   init() {
-    let instance = this.getInstance();
-    let me = this;
-    instance.registerConnectionType("basic", {anchor: "Continuous", connector: "StateMachine"});
-    let canvas = document.getElementById("canvas");
-    let windows = jsPlumb.getSelector(".w");
-    instance.bind("click", function (c) {
-      instance.deleteConnection(c);
+    let me = this, sources = [], predefinedPositions = this.getPredefinedPositions(), goodsTotals = [],
+      connections = [];
+    this.party.members.forEach(function (member: User, index) {
+      sources.push(me.convertMemberToSource(member, predefinedPositions[index]));
     });
-    instance.bind("connection", function (info) {
-      info.connection.getOverlay("label").setLabel(info.connection.id);
-    });
-
-    // bind a double click listener to "canvas"; add new node when this occurs.
-    jsPlumb.on(canvas, "dblclick", function (e) {
-      me.newNode(e.offsetX, e.offsetY);
+    me.party.goods.forEach(function (good: Good) {
+      goodsTotals.push(_.extend({
+        totals: {
+          spent: me.party.getTotalSpent(good),
+          consumed: me.party.getTotalConsumed(good)
+        }
+      }, good));
     });
 
-    // suspend drawing and initialise.
-    instance.batch(function () {
-      windows.forEach(function (w) {
-        me.initNode(w);
+    me.party.members.forEach(member => {
+      member.partyGoods.forEach(partyGood => {
+        let good = _.findWhere(goodsTotals, {id: partyGood.goodId});
+        let buyers = good.buyers.filter(function (buyer) {
+          return buyer.userId !== member.id;
+        });
+        buyers.forEach(buyer => {
+          let opposite = _.findWhere(connections, {from: buyer.userId, to: member.id}),
+            currentCount = good.totals.spent * ((partyGood.goodCount / good.totals.consumed) * (buyer.totalPrice / good.totals.spent));
+          if (opposite) {
+            if (opposite.count - currentCount === 0) {
+              connections = connections.filter(c => c !== opposite);
+            } else if (opposite.count > currentCount) {
+              opposite.count = opposite.count - currentCount;
+            } else {
+              connections = connections.filter(c => c !== opposite);
+              connections.push({
+                from: member.id,
+                to: buyer.userId,
+                count: currentCount - opposite.count
+              });
+            }
+          } else {
+            connections.push({
+              from: member.id,
+              to: buyer.userId,
+              count: currentCount
+            });
+          }
+        });
       });
-      // and finally, make a few connections
-      instance.connect({source: "opened", target: "phone1", type: "basic"});
-      instance.connect({source: "phone1", target: "phone1", type: "basic"});
-      instance.connect({source: "phone1", target: "inperson", type: "basic"});
-      instance.connect({
-        source: "phone2",
-        target: "rejected",
-        type: "basic"
-      });
     });
-
-    jsPlumb.fire("jsPlumbDemoLoaded", instance);
+    sources.forEach(s => {
+      me.newNode(s);
+    });
+    connections.forEach(c => {
+      me.connect(c);
+    });
   }
 }

@@ -1,20 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 @import url('https://fonts.googleapis.com/css?family=Roboto');
-@import "../node_modules/jsplumb/dist/css/jsplumbtoolkit-defaults.css";
 body {
   margin: 0;
   padding: 0;
 }
 
 .icon-button {
-  min-width: 20px!important;
-  padding: 5px!important;
+  min-width: 20px !important;
+  padding: 5px !important;
   max-width: 35px;
 }
+
 .icon-button i {
   max-width: 24px;
 }
+
 .pull-right {
   float: right;
 }
